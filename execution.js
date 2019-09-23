@@ -57,3 +57,9 @@ function exercise_help() {
     'Choose an option from the dropdown that best signifies your daily exercise regimen'
   );
 }
+
+//inputhint
+function inputhint() {
+  document.getElementById('hint').innerHTML =
+    'Please choose an option from dropdown that describes your physical activity';
+}
