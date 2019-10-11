@@ -18,29 +18,37 @@
         <table>
           <tr>
             <td><label>Age</label></td>
-            <td><input type="text" id="age" name="Age" required/></td>
+            <td><input type="text" id="age" name="Age" required onkeydown="ageinput()"/>
+            <b id="stepage">&lt ENTER AGE</b></td>
           </tr>
           <tr>
             <td><label>Gender</label></td>
-            <td><input type="radio" id="ml" name="gen" value="male" checked>Male</input>
-            <input type="radio" id="fml" name="gen" value="female">Female</input></td>
+            <td><input type="radio" id="ml" name="gen" value="male" checked onkeydown="genderinput()">Male</input>
+            <input type="radio" id="fml" name="gen" value="female" onkeydown="genderinput()">Female</input></td>
           </tr>
           
           <tr>
             <td><label>Height</label></td>
-            <td><input id="height" type="text" required>feet</input><input id="inchheight" type="text" value="0">inches</input></td>
+            <td><input id="height" type="text" required onkeydown="heightinput()">feet</input><input id="inchheight" type="text" value="0">inches</input>
+            <b id="stepheight" style="display:none">^ ENTER HEIGHT</b></td>
           </tr>
           <tr>
             <td><label>Weight</label></td>
-            <td><input id="weight" type="text" required>pounds</input></td>
+            <td><input id="weight" type="text" required onkeydown="weightinput()">pounds</input>
+            <b id="stepweight" style="display:none">^ ENTER WEIGHT</b></td>
           </tr>
           
           <tr>
-              <td><input type="button" id="calcbmr" value="Calculate"  onclick="calc()"/></td> 
-              <td><input type="button" id="caloricneed" value="Check Caloric need" onclick="calneed()"</td>
+              <td><input type="button" id="sample" value="Sample" onclick="wizardcalc()"/></td>
+              <td><input type="button" id="calcbmr" value="Calculate"  onclick="calc()"/>
+              <input type="button" id="caloricneed" value="Check Caloric need" onclick="calneed()"/> </td>
+              
           </tr>
         
         </table>
+        <div>
+            <b id="stepbutton" style="display:none">^ CHOOSE SAMPLE/CALCULATE FOR BMR. THEN CALORIC NEED</b>
+        </div>
         <div>
          <select id="dropdown" style="display:none" onchange="calories()" onmouseover="inputhint()">
             <option value="1.2">Sedentary: little or no exercise</option>
@@ -57,6 +65,13 @@
       </form>
       <p id="bmr"></p>
       <p id="calorie"></p>
+      <p><button id="settingsbtn" type="button" onclick="getoverflowmenu()" style="display:none">Settings</button></p>
+      <p id="convert" style="display:none">
+      <input type="radio" id="setjoule" name="convertradio">Joule </input>
+      <input type="radio" id="setkcal" name="convertradio">Kilocalories</input>
+      </p>
+      <p><button id="convertbtn" type="button" onclick="overflowmenu()"style="display:none">Convert value</button></p>
+      <p id="convertedcalorie"></p>
 
     </div>
 
