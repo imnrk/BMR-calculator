@@ -4,53 +4,105 @@
   <head>
     <link rel="stylesheet" href="bmrcalc.css"/>
     <h1>BMR calculator</h1>
-    <p>This calculator users the Mifflin-St Jeor Equation for calculation</p>
-    <input type="button" value="What is BMR?" onclick="document.getElementById('info').style.display='block'"/>
-    <p hidden id="info">The basal metabolic rate (BMR) is the amount of energy needed while resting \
-        in a temperate environment when the digestive system is inactive. It is the equivalent of figuring out how much \
+    <div >
+        <input type="button" value="Naive" onclick="localStorage.setItem('usercount',0)"/>
+        <input type="button" value="Novice" onclick="localStorage.setItem('usercount',1)"/>
+        <input type="button" value="Typical" onclick="localStorage.setItem('usercount',5)"/>
+        <input type="button" value="Advanced" onclick="localStorage.setItem('usercount',10)"/>
+        
+      </div>
+    <p>This calculator users the Mifflin-St Jeor Equation for calculation.The basal metabolic rate (BMR) is the amount of energy needed while resting 
+        in a temperate environment when the digestive system is inactive. It is the equivalent of figuring out how much 
         gas an idle car consumes while parked.</p>
+
+    <input type="button" id="infobtn"value="More Info..." onclick="document.getElementById('info').style.display='block'" style="display:none"/>
+    <label id="fc" style="display:none">
+        <label id="featuredcontent">
+        Try a age value like 40
+        </label>
+        <label id="featuredcontent1">
+        Try a age value like 24
+        </label>
+      </label>
+    <script>
+    if(localStorage.usercount>=10){
+      document.getElementById('fc').style.display='block';
+    }
+    </script>
+    
+    <p hidden id="info">
+        The BMR is measured under very restrictive circumstances while awake. 
+        An accurate BMR measurement requires that a person's sympathetic nervous system is inactive, 
+        which means the person must be completely rested. Basal metabolism is usually the largest component of a person's 
+        total caloric needs. The daily caloric need is the BMR value multiplied by a factor with a value between 1.2 and 1.9, 
+        depending on activity level.</p>
   </head>
   <script src="execution.js" ></script> 
 
-  <body>
+  <body onload="myStartup()">
+    
     <div>
       <form>
-        <table>
-          <tr>
-            <td><label>Age</label></td>
-            <td><input type="text" id="age" name="Age" required onkeydown="ageinput()"/>
-            <b id="stepage">&lt ENTER AGE</b></td>
-          </tr>
-          <tr>
-            <td><label>Gender</label></td>
-            <td><input type="radio" id="ml" name="gen" value="male" checked onkeydown="genderinput()">Male</input>
-            <input type="radio" id="fml" name="gen" value="female" onkeydown="genderinput()">Female</input></td>
-          </tr>
           
-          <tr>
-            <td><label>Height</label></td>
-            <td><input id="height" type="text" required onkeydown="heightinput()">feet</input><input id="inchheight" type="text" value="0">inches</input>
-            <b id="stepheight" style="display:none">^ ENTER HEIGHT</b></td>
-          </tr>
-          <tr>
-            <td><label>Weight</label></td>
-            <td><input id="weight" type="text" required onkeydown="weightinput()">pounds</input>
-            <b id="stepweight" style="display:none">^ ENTER WEIGHT</b></td>
-          </tr>
-          
-          <tr>
-              <td><input type="button" id="sample" value="Sample" onclick="wizardcalc()"/></td>
-              <td><input type="button" id="calcbmr" value="Calculate"  onclick="calc()"/>
-              <input type="button" id="caloricneed" value="Check Caloric need" onclick="calneed()"/> </td>
-              
-          </tr>
+          <br />
+          <meter id="complete_meter" value="0"></meter>
+          <br />
+          <br />
+           <label>Age</label> 
+          <input type="text" id="age" name="Age" required onkeydown="ageinput();document.getElementById('complete_meter').value='0.20'" onchange="if(localStorage.usercount>=5)changeage();" onmouseover="if(localStorage.usercount<5)inputhint()" />
+            <b id="stepage">&lt ENTER AGE</b>
+            <script>
+            if(localStorage.usercount!=0){
+                document.getElementById('stepage').style.display='none';
+            }
+            </script>
+            <label id="defaultval"></label><label id="hint"></label>
+
+            <br />
+            <br />  
         
-        </table>
+            <label>Gender</label>
+            <input type="radio" id="ml" name="gen" value="male" checked onkeydown="document.getElementById('complete_meter').value='0.40'">Male</input>
+            <input type="radio" id="fml" name="gen" value="female" onkeydown="document.getElementById('complete_meter').value='0.40'">Female</input>
+            <br />
+            <br />
+          
+            <label>Height</label>
+            <input id="height" type="text" required onkeydown="heightinput();document.getElementById('complete_meter').value='0.60'">feet</input><input id="inchheight" type="text" value="0">inches</input>
+            <label><b id="stepheight" style="display:none">^ ENTER HEIGHT</b></label>
+            <br /> 
+            <br />
+          
+           <label>Weight</label>
+            <input id="weight" type="text" required onkeydown="weightinput();document.getElementById('complete_meter').value='0.80'">pounds</input>
+            <b id="stepweight" style="display:none">^ ENTER WEIGHT</b>
+            
+            <br />
+            <br />
+
+          
+            <input type="button" id="sample" value="Sample" onclick="wizardcalc()"/>
+
+            <input type="button" id="calcbmr" value="Calculate"  onclick="calc();document.getElementById('complete_meter').value='1'"/>
+            <input type="button" id="caloricneedbtn" value="Check Caloric need" onclick="calneed()" style="display:none"/>
+            <script>
+                if(localStorage.usercount==0){
+                  document.getElementById('caloricneedbtn').style.display="none";
+                }
+                if(localStorage.usercount>=5){
+                  document.getElementById('sample').style.display="none";
+                }
+                </script>
+              
+
+        
+        
         <div>
-            <b id="stepbutton" style="display:none">^ CHOOSE SAMPLE/CALCULATE FOR BMR. THEN CALORIC NEED</b>
+            <b id="stepbutton" style="display:none">^ CHOOSE SAMPLE/CALCULATE FOR BMR</b>
+            
         </div>
         <div>
-         <select id="dropdown" style="display:none" onchange="calories()" onmouseover="inputhint()">
+         <select id="dropdown" style="display:none" onchange="calories()">
             <option value="1.2">Sedentary: little or no exercise</option>
             <option value="1.37">Exercise 1-3 times/week</option>
             <option value="1.45">Exercise 4-5 times/week</option>
@@ -60,7 +112,7 @@
           </select>
           <br />
           <input type="button" id="exbtn"value="Dropdown help" style="display:none" onclick="exercise_help()" />
-          <p id="hint"></p>
+          
         </div>
       </form>
       <p id="bmr"></p>
@@ -72,8 +124,9 @@
       </p>
       <p><button id="convertbtn" type="button" onclick="overflowmenu()"style="display:none">Convert value</button></p>
       <p id="convertedcalorie"></p>
+      <button id="nextsteps" onclick="alert('Use the BMR further to calculate food intake')">Next Steps>></button>
 
     </div>
-
+    
   </body>
 </html>

@@ -5,6 +5,10 @@ body {
 input {
   margin-bottom: 10px;
 }
+
+.split {
+  width: 50%;
+}
 /* 
 form {
   width: 50%;

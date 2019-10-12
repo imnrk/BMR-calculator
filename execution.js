@@ -1,22 +1,18 @@
 let bmr = 0;
 
-function clickCounter() {
-  // if(typeof(Storage)!==undefined){
-  //   if(localStorage.clickcount){
-  //     localStorage.clickcount=Number(localStorage.clickcount)+1;
-  //   }
-  //   else{
-  //     localStorage.clickcount=1;
-  //   }
-  // }
-  // document.getElementById("result").innerHTML="You clicked "+localStorage.clickcount+" time(s)";
-}
-
 function calc() {
   //sources - w3 schools/stack overflow/calculator.net
   //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show
   //https://www.w3schools.com/tags/tag_select.asp
   //https://www.calculator.net/bmr-calculator.html?ctype=standard&cage=25&csex=m&cheightfeet=5&cheightinch=10&cpound=180&cheightmeter=180&ckg=60&cmop=0&coutunit=c&cformula=m&cfatpct=20&x=55&y=36
+  // /console.log(localStorage.usercount);
+  if (localStorage.usercount > 1) {
+    document.getElementById('caloricneedbtn').style.display = 'block';
+  }
+
+  document.getElementById('featuredcontent').style.display = 'none';
+  document.getElementById('featuredcontent').style.display = 'none';
+  document.getElementById('hint').style.display = 'none';
   let val = '';
   if (document.getElementById('ml').checked) {
     val =
@@ -41,11 +37,16 @@ function calc() {
   buttoninput();
 }
 
-//Hidden information - Focus pattern
 function calneed() {
+  document.getElementById('featuredcontent').style.display = 'none';
+  document.getElementById('featuredcontent1').style.display = 'none';
   document.getElementById('dropdown').style.display = 'block';
-  document.getElementById('exbtn').style.display = 'block';
-  document.getElementById('settingsbtn').style.display = 'block';
+  if (localStorage.usercount >= 5) {
+    document.getElementById('exbtn').style.display = 'block';
+  }
+  if (localStorage.usercount >= 10) {
+    document.getElementById('settingsbtn').style.display = 'block';
+  }
   buttoninput();
 }
 
@@ -67,7 +68,7 @@ function exercise_help() {
 //inputhints - Help pattern
 function inputhint() {
   document.getElementById('hint').innerHTML =
-    'Please choose an option from dropdown that describes your physical activity';
+    '(Hint: Please enter age(in years), height(feet/inches), weight(pounds))';
 }
 
 //Overflow Menu -Focus Pattern
@@ -96,6 +97,11 @@ function getoverflowmenu() {
 
 //Wizard - Focus pattern
 function wizardcalc() {
+  if (localStorage.usercount > 1) {
+    document.getElementById('caloricneedbtn').style.display = 'block';
+  }
+  document.getElementById('featuredcontent').style.display = 'none';
+  document.getElementById('featuredcontent1').style.display = 'none';
   document.getElementById('age').value = 25;
   document.getElementById('height').value = 6;
   document.getElementById('weight').value = 120;
@@ -116,19 +122,65 @@ function wizardcalc() {
 //Coachmarks - Focus pattern
 function ageinput() {
   document.getElementById('stepage').style.display = 'none';
-  document.getElementById('stepheight').style.display = 'block';
+  if (localStorage.usercount == 1)
+    document.getElementById('stepheight').style.display = 'block';
 }
 
 function heightinput() {
   document.getElementById('stepheight').style.display = 'none';
-  document.getElementById('stepweight').style.display = 'block';
+  if (localStorage.usercount == 1)
+    document.getElementById('stepweight').style.display = 'block';
 }
 
 function weightinput() {
   document.getElementById('stepweight').style.display = 'none';
-  document.getElementById('stepbutton').style.display = 'block';
+  if (localStorage.usercount == 1)
+    document.getElementById('stepbutton').style.display = 'block';
 }
 
 function buttoninput() {
   document.getElementById('stepbutton').style.display = 'none';
+}
+
+//Default values
+
+function changeage() {
+  let age = document.getElementById('age').value;
+  if (age <= 25) {
+    document.getElementById('defaultval').innerHTML =
+      'Your age indicates tendency of higher BMR';
+  } else {
+    document.getElementById('defaultval').innerHTML =
+      'Your age indicates tendency of lower BMR';
+  }
+}
+
+function myStartup() {
+  /* alert("Hello World"); */
+  console.log(localStorage.usercount);
+  if (typeof Storage !== 'undefined') {
+    if (isNaN(localStorage.usercount)) localStorage.usercount = 0;
+    else localStorage.usercount++;
+  } else alert('No Local Storage');
+
+  uc = 'User Count ' + localStorage.usercount;
+
+  if (typeof Storage !== 'undefined') {
+    usercount = localStorage.usercount;
+    if (usercount == 0) {
+      document.getElementById('caloricneedbtn').style.display = 'none';
+    }
+    if (usercount > 0 && usercount < 5) {
+    }
+    if (usercount >= 5 && usercount < 10) {
+      /* show the hide button (for hidden information pattern) */
+      document.getElementById('infobtn').style.display = 'block';
+    }
+    if (usercount >= 10) {
+      /* show the hide button (for hidden information pattern) */
+      document.getElementById('infobtn').style.display = 'block';
+      document.getElementById('featuredcontent').style.display = 'block';
+      document.getElementById('featuredcontent1').style.display = 'block';
+    }
+  }
 }
