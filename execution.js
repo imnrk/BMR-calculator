@@ -68,6 +68,10 @@ function inputhint() {
     '(Hint: Please enter age(in years), height(feet/inches), weight(pounds))';
 }
 
+function showphyactivity() {
+  document.getElementById('phy').innerHTML = 'Enter physical activity';
+}
+
 //Overflow Menu -Focus Pattern
 function overflowmenu() {
   let x = document.getElementById('calorie').innerHTML;
@@ -179,5 +183,13 @@ function myStartup() {
       document.getElementById('featuredcontent').style.display = 'block';
       document.getElementById('featuredcontent1').style.display = 'block';
     }
+  }
+}
+
+//Inline validation
+function inline_validation(x) {
+  var val = document.getElementById(x).value;
+  if (isNaN(val)) {
+    alert(x + ' should be a number');
   }
 }

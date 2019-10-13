@@ -55,6 +55,14 @@ Featured content:-
 
 Available for the advanced users. This suggests values for the age.
 
+Completeness meter:-
+
+Added a completeness meter to judge completeness based on steps taken
+
+Next steps:-
+
+Added a button for the next steps
+
 # Sources of reference
 
 - w3schools.com
