@@ -1,11 +1,7 @@
 let bmr = 0;
 
+//Calculate the BMR
 function calc() {
-  //sources - w3 schools/stack overflow/calculator.net
-  //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show
-  //https://www.w3schools.com/tags/tag_select.asp
-  //https://www.calculator.net/bmr-calculator.html?ctype=standard&cage=25&csex=m&cheightfeet=5&cheightinch=10&cpound=180&cheightmeter=180&ckg=60&cmop=0&coutunit=c&cformula=m&cfatpct=20&x=55&y=36
-  // /console.log(localStorage.usercount);
   if (localStorage.usercount > 1) {
     document.getElementById('caloricneedbtn').style.display = 'block';
   }
@@ -37,6 +33,7 @@ function calc() {
   buttoninput();
 }
 
+//Calculate Daily calorific need
 function calneed() {
   document.getElementById('featuredcontent').style.display = 'none';
   document.getElementById('featuredcontent1').style.display = 'none';
@@ -73,7 +70,6 @@ function inputhint() {
 
 //Overflow Menu -Focus Pattern
 function overflowmenu() {
-  //https://stackoverflow.com/questions/362614/calling-onclick-on-a-radiobutton-list-using-javascript
   let x = document.getElementById('calorie').innerHTML;
   x = parseFloat(x.split(' ')[4]);
   var joules = x * 4.184;
@@ -155,6 +151,7 @@ function changeage() {
   }
 }
 
+//Onload startup
 function myStartup() {
   /* alert("Hello World"); */
   console.log(localStorage.usercount);

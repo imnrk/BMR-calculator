@@ -2,28 +2,30 @@
 <html>
   <title>BMR Calculator</title>
   <head>
-    <link rel="stylesheet" href="bmrcalc.css"/>
+    <link/>
     <h1>BMR calculator</h1>
-    <div >
+    <div>
         <input type="button" value="Naive" onclick="localStorage.setItem('usercount',0)"/>
         <input type="button" value="Novice" onclick="localStorage.setItem('usercount',1)"/>
         <input type="button" value="Typical" onclick="localStorage.setItem('usercount',5)"/>
         <input type="button" value="Advanced" onclick="localStorage.setItem('usercount',10)"/>
-        
-      </div>
-    <p>This calculator users the Mifflin-St Jeor Equation for calculation.The basal metabolic rate (BMR) is the amount of energy needed while resting 
+    </div>
+
+    <p>
+        This calculator users the Mifflin-St Jeor Equation for calculation.The basal metabolic rate (BMR) is the amount of energy needed while resting 
         in a temperate environment when the digestive system is inactive. It is the equivalent of figuring out how much 
-        gas an idle car consumes while parked.</p>
+        gas an idle car consumes while parked.
+    </p>
 
     <input type="button" id="infobtn"value="More Info..." onclick="document.getElementById('info').style.display='block'" style="display:none"/>
     <label id="fc" style="display:none">
-        <label id="featuredcontent">
+      <label id="featuredcontent">
         Try a age value like 40
-        </label>
-        <label id="featuredcontent1">
-        Try a age value like 24
-        </label>
       </label>
+      <label id="featuredcontent1">
+        Try a age value like 24
+      </label>
+    </label>
     <script>
     if(localStorage.usercount>=10){
       document.getElementById('fc').style.display='block';
@@ -84,6 +86,8 @@
             <input type="button" id="sample" value="Sample" onclick="wizardcalc()"/>
 
             <input type="button" id="calcbmr" value="Calculate"  onclick="calc();document.getElementById('complete_meter').value='1'"/>
+            <br />
+            <br />
             <input type="button" id="caloricneedbtn" value="Check Caloric need" onclick="calneed()" style="display:none"/>
             <script>
                 if(localStorage.usercount==0){
@@ -101,6 +105,8 @@
             <b id="stepbutton" style="display:none">^ CHOOSE SAMPLE/CALCULATE FOR BMR</b>
             
         </div>
+        <br />
+        <br />
         <div>
          <select id="dropdown" style="display:none" onchange="calories()">
             <option value="1.2">Sedentary: little or no exercise</option>
